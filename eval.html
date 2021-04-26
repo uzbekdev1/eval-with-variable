@@ -4,7 +4,6 @@
 <head>
     <meta charset="utf-8">
     <title>Test eval func</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
 
         var app = {
@@ -28,10 +27,11 @@
                     }
                 }
             ],
-            data2:{
-                a:10000,
-                b:20000
-            }
+            data2: {
+                a: 10000,
+                b: 20000
+            },
+            data3: 30000
         };
 
         function evalWithVariable(prop, varb) {
@@ -44,21 +44,22 @@
                 var elem = params[index];
                 obj = obj[elem];
             }
+            return obj;
         }
 
-        $(function () {
-
-            var result = evalWithVariable("item2.item3.item4.a", app.data1[0]);
-
-            $("#result").html(result);
-
-        });
+        window.onload = function () {
+            document.getElementById("result1").innerHTML = evalWithVariable("item2.item3.item4.a", app.data1[0]);
+            document.getElementById("result2").innerHTML = evalWithVariable("data2.a", app);
+            document.getElementById("result3").innerHTML = evalWithVariable("", app.data3);
+        };
 
     </script>
 </head>
 
 <body>
-    <h2 id="result"></h2>
+    <h2 id="result1"></h2>
+    <h2 id="result2"></h2>
+    <h2 id="result3"></h2>
 </body>
 
 </html>
