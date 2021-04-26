@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Test eval func</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+
+        var app = {
+            data1: [
+                {
+                    item1: {
+                        a: 1,
+                        b: 2
+                    },
+                    item2: {
+                        a: 10,
+                        b: 20,
+                        item3: {
+                            a: 100,
+                            b: 200,
+                            item4: {
+                                a: 1000,
+                                b: 2000
+                            }
+                        }
+                    }
+                }
+            ],
+            data2:{
+                a:10000,
+                b:20000
+            }
+        };
+
+        function evalWithVariable(prop, varb) {
+            var obj = varb;
+            var params = prop.split('.');
+            for (var index = 0; index < params.length; index++) {
+                var elem = params[index];
+                obj = obj[elem];
+            }
+
+            return obj;
+        }
+
+        $(function () {
+
+            var result = evalWithVariable("item2.item3.item4.a", app.data1[0]);
+
+            $("#result").html(result);
+
+        });
+
+    </script>
+</head>
+
+<body>
+    <h2 id="result"></h2>
+</body>
+
+</html>
