@@ -35,14 +35,15 @@
         };
 
         function evalWithVariable(prop, varb) {
+            if (!prop || prop.indexOf(".") === -1) {
+                return varb;
+            }
             var obj = varb;
             var params = prop.split('.');
             for (var index = 0; index < params.length; index++) {
                 var elem = params[index];
                 obj = obj[elem];
             }
-
-            return obj;
         }
 
         $(function () {
